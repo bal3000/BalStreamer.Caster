@@ -5,9 +5,15 @@ import (
 	"time"
 )
 
-// EventMessage interface for transforming messages to masstransit ones
-type EventMessage interface {
+// ChromecastEventMessage interface for transforming messages
+type ChromecastEventMessage interface {
 	TransformMessage() ([]byte, error)
+}
+
+type StreamEvent interface {
+	GetType() string
+	GetStream() string
+	GetChromecast() string
 }
 
 // StreamToChromecastEvent the send to chromecast event
@@ -21,6 +27,30 @@ type StreamToChromecastEvent struct {
 type StopPlayingStreamEvent struct {
 	ChromeCastToStop string    `json:"chromeCastToStop"`
 	StopDateTime     time.Time `json:"stopDateTime"`
+}
+
+func (event *StreamToChromecastEvent) GetType() string {
+	return "PlayStreamEvent"
+}
+
+func (event *StreamToChromecastEvent) GetStream() string {
+	return event.Stream
+}
+
+func (event *StreamToChromecastEvent) GetChromecast() string {
+	return event.ChromeCastToStream
+}
+
+func (event *StopPlayingStreamEvent) GetType() string {
+	return "StopStreamEvent"
+}
+
+func (event *StopPlayingStreamEvent) GetStream() string {
+	return ""
+}
+
+func (event *StopPlayingStreamEvent) GetChromecast() string {
+	return event.ChromeCastToStop
 }
 
 // ChromecastEvent event when a chromecast is found

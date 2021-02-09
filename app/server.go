@@ -1,10 +1,12 @@
 package app
 
 import (
+	"encoding/json"
 	"fmt"
 	"github.com/bal3000/BalStreamer.Caster/infrastructure"
 	"github.com/bal3000/BalStreamer.Caster/models"
 	"github.com/streadway/amqp"
+	"log"
 )
 
 const routingKey string = "chromecast-key"
@@ -54,6 +56,11 @@ func processMessages(d amqp.Delivery) bool {
 	fmt.Printf("processing message: %s", string(d.Body))
 
 	// find if event is start or stop
+	m := make(map[string]interface{})
+	if err := json.Unmarshal(d.Body, &m); err != nil {
+		log.Fatalln(err)
+		return false
+	}
 
 	// find chromecast to send to - might have to turn into a channel
 

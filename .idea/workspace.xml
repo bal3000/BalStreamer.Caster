@@ -4,9 +4,7 @@
     <list default="true" id="0f36d756-68ec-4d29-a5ff-5693d6611269" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/server.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/server.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/infrastructure/chromecast-streamer.go" beforeDir="false" afterPath="$PROJECT_DIR$/infrastructure/chromecast-streamer.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/infrastructure/rabbitmq.go" beforeDir="false" afterPath="$PROJECT_DIR$/infrastructure/rabbitmq.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/models/events.go" beforeDir="false" afterPath="$PROJECT_DIR$/models/events.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -65,7 +63,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="First commit - not complete yet" />
     <MESSAGE value="finished chromecast streamer" />
-    <option name="LAST_COMMIT_MESSAGE" value="finished chromecast streamer" />
+    <MESSAGE value="finished wiring it all up, just rabbit mq left to implement" />
+    <option name="LAST_COMMIT_MESSAGE" value="finished wiring it all up, just rabbit mq left to implement" />
   </component>
   <component name="VgoProject">
     <integration-enabled>true</integration-enabled>

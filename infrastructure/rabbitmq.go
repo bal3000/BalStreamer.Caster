@@ -11,7 +11,7 @@ import (
 
 // RabbitMQ interface to inject into handlers for using rabbitmq
 type RabbitMQ interface {
-	SendMessage(routingKey string, message models.EventMessage) error
+	SendMessage(routingKey string, message models.ChromecastEventMessage) error
 	StartConsumer(routingKey string, handler func(d amqp.Delivery) bool, concurrency int) error
 	CloseChannel()
 }
@@ -52,7 +52,7 @@ func (mq *rabbitMQConnection) CloseChannel() {
 }
 
 // SendMessage sends the given message
-func (mq *rabbitMQConnection) SendMessage(routingKey string, message models.EventMessage) error {
+func (mq *rabbitMQConnection) SendMessage(routingKey string, message models.ChromecastEventMessage) error {
 	b, err := message.TransformMessage()
 	if err != nil {
 		return err
