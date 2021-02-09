@@ -1,0 +1,5 @@
+github.com/adrg/libvlc-go v0.0.1 h1:4bh+vz1XQ+mglpKzSWryhOhmyN85HrzWxzGoGfbbldU=
+github.com/adrg/libvlc-go/v3 v3.1.0 h1:4Tgf7X7wuUTjLXrJixEPPbY7qvjY8hWP2qK5xGFc6fY=
+github.com/adrg/libvlc-go/v3 v3.1.0/go.mod h1:xJK0YD8cyMDejnrTFQinStE6RYCV1nlfS8KmqTpszSc=
+github.com/streadway/amqp v1.0.0 h1:kuuDrUJFZL1QYL9hUNuCxNObNzB0bV/ZG5jV3RWAQgo=
+github.com/streadway/amqp v1.0.0/go.mod h1:AZpEONHx3DKn8O/DFsRAY58/XVQiIPMTMB1SddzLXVw=
