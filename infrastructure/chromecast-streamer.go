@@ -9,15 +9,17 @@ import (
 const microdns = "microdns_renderer"
 
 type Streamer interface {
-	DiscoverChromecasts(itemAdded chan *vlc.Renderer, itemDeleted chan *vlc.Renderer) error
+	DiscoverChromecasts(itemAdded chan string, itemDeleted chan string) error
+	GetChromecast(key string) *vlc.Renderer
 	StartCasting(url string, rendererItem *vlc.Renderer) error
 	StopCasting(rendererItem *vlc.Renderer) error
 	CloseAndCleanUp()
 }
 
 type chromecastStreamer struct {
-	discoverer *vlc.RendererDiscoverer
-	player     *vlc.Player
+	discoverer  *vlc.RendererDiscoverer
+	player      *vlc.Player
+	chromecasts map[string]vlc.Renderer
 }
 
 func NewChromecastStreamer() Streamer {
@@ -38,7 +40,7 @@ func NewChromecastStreamer() Streamer {
 		log.Fatal(err)
 	}
 
-	return &chromecastStreamer{discoverer: discoverer, player: player}
+	return &chromecastStreamer{discoverer: discoverer, player: player, chromecasts: make(map[string]vlc.Renderer)}
 }
 
 func getDiscoverer() (*vlc.RendererDiscoverer, error) {
@@ -64,7 +66,7 @@ func getDiscoverer() (*vlc.RendererDiscoverer, error) {
 }
 
 // DiscoverChromecasts notifies when chromecasts are found or lost on my network
-func (s *chromecastStreamer) DiscoverChromecasts(itemAdded chan *vlc.Renderer, itemDeleted chan *vlc.Renderer) error {
+func (s *chromecastStreamer) DiscoverChromecasts(itemAdded chan string, itemDeleted chan string) error {
 	// Start renderer discovery.
 	stop := make(chan error)
 
@@ -80,7 +82,12 @@ func (s *chromecastStreamer) DiscoverChromecasts(itemAdded chan *vlc.Renderer, i
 				stop <- err
 			}
 			if rendererType == vlc.RendererChromecast {
-				itemAdded <- r
+				name, err := r.Name()
+				if err != nil {
+					stop <- err
+				}
+				s.chromecasts[name] = *r
+				itemAdded <- name
 			}
 		case vlc.RendererDiscovererItemDeleted:
 			// The renderer (`r`) is no longer available.
@@ -89,7 +96,12 @@ func (s *chromecastStreamer) DiscoverChromecasts(itemAdded chan *vlc.Renderer, i
 				stop <- err
 			}
 			if rendererType == vlc.RendererChromecast {
-				itemDeleted <- r
+				name, err := r.Name()
+				if err != nil {
+					stop <- err
+				}
+				delete(s.chromecasts, name)
+				itemDeleted <- name
 			}
 		}
 	}
@@ -103,6 +115,14 @@ func (s *chromecastStreamer) DiscoverChromecasts(itemAdded chan *vlc.Renderer, i
 	}
 	if err := s.discoverer.Stop(); err != nil {
 		return err
+	}
+
+	return nil
+}
+
+func (s *chromecastStreamer) GetChromecast(key string) *vlc.Renderer {
+	if renderer, ok := s.chromecasts[key]; ok {
+		return &renderer
 	}
 
 	return nil
@@ -132,6 +152,12 @@ func (s *chromecastStreamer) StartCasting(url string, rendererItem *vlc.Renderer
 }
 
 func (s *chromecastStreamer) StopCasting(rendererItem *vlc.Renderer) error {
+	if s.player.IsPlaying() {
+		err := s.player.Stop()
+		if err != nil {
+			return err
+		}
+	}
 	return nil
 }
 
