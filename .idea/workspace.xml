@@ -5,6 +5,9 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/server.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/server.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/infrastructure/chromecast-streamer.go" beforeDir="false" afterPath="$PROJECT_DIR$/infrastructure/chromecast-streamer.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/infrastructure/rabbitmq.go" beforeDir="false" afterPath="$PROJECT_DIR$/infrastructure/rabbitmq.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/events.go" beforeDir="false" afterPath="$PROJECT_DIR$/models/events.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,20 +64,10 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="First commit - not complete yet" />
-    <option name="LAST_COMMIT_MESSAGE" value="First commit - not complete yet" />
+    <MESSAGE value="finished chromecast streamer" />
+    <option name="LAST_COMMIT_MESSAGE" value="finished chromecast streamer" />
   </component>
   <component name="VgoProject">
     <integration-enabled>true</integration-enabled>
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
-          <url>file://$PROJECT_DIR$/infrastructure/chromecast-streamer.go</url>
-          <line>24</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

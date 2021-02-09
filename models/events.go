@@ -25,20 +25,20 @@ type StopPlayingStreamEvent struct {
 
 // ChromecastEvent event when a chromecast is found
 type ChromecastFoundEvent struct {
-	Chromecast interface{} `json:"chromecast"`
+	Chromecast string `json:"chromecast"`
 }
 
 // ChromecastEvent event when a chromecast is found
 type ChromecastLostEvent struct {
-	Chromecast interface{} `json:"chromecast"`
+	Chromecast string `json:"chromecast"`
 }
 
 // TransformMessage transforms the message to a masstransit one and then turns into JSON
-func (message *StreamToChromecastEvent) TransformMessage() ([]byte, error) {
+func (message *ChromecastFoundEvent) TransformMessage() ([]byte, error) {
 	return json.Marshal(message)
 }
 
 // TransformMessage transforms the message to a masstransit one and then turns into JSON
-func (message *StopPlayingStreamEvent) TransformMessage() ([]byte, error) {
+func (message *ChromecastLostEvent) TransformMessage() ([]byte, error) {
 	return json.Marshal(message)
 }

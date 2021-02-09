@@ -3,7 +3,6 @@ package infrastructure
 import (
 	"errors"
 	vlc "github.com/adrg/libvlc-go/v3"
-	"log"
 )
 
 const microdns = "microdns_renderer"
@@ -22,25 +21,25 @@ type chromecastStreamer struct {
 	chromecasts map[string]vlc.Renderer
 }
 
-func NewChromecastStreamer() Streamer {
+func NewChromecastStreamer() (Streamer, error) {
 	// Initialize libVLC. Additional command line arguments can be passed in
 	// to libVLC by specifying them in the Init function.
 	if err := vlc.Init("--no-audio"); err != nil {
-		log.Fatal(err)
+		return nil, err
 	}
 
 	discoverer, err := getDiscoverer()
 	if err != nil {
-		log.Fatal(err)
+		return nil, err
 	}
 
 	// Create a new player.
 	player, err := vlc.NewPlayer()
 	if err != nil {
-		log.Fatal(err)
+		return nil, err
 	}
 
-	return &chromecastStreamer{discoverer: discoverer, player: player, chromecasts: make(map[string]vlc.Renderer)}
+	return &chromecastStreamer{discoverer: discoverer, player: player, chromecasts: make(map[string]vlc.Renderer)}, nil
 }
 
 func getDiscoverer() (*vlc.RendererDiscoverer, error) {
@@ -163,7 +162,9 @@ func (s *chromecastStreamer) StopCasting(rendererItem *vlc.Renderer) error {
 
 // CloseAndCleanUp closes all connections and disposes resources
 func (s *chromecastStreamer) CloseAndCleanUp() {
-	s.player.Stop()
+	if s.player.IsPlaying() {
+		s.player.Stop()
+	}
 	s.player.Release()
 	defer vlc.Release()
 	defer s.discoverer.Release()
