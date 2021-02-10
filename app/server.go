@@ -9,7 +9,11 @@ import (
 	"log"
 )
 
-const routingKey string = "chromecast-key"
+const (
+	routingKey         string = "chromecast-key"
+	streamToChromecast string = "StreamToChromecastEvent"
+	stopChromecast     string = "StopPlayingStreamEvent"
+)
 
 type Server struct {
 	RabbitMQ           infrastructure.RabbitMQ
@@ -56,10 +60,15 @@ func processMessages(d amqp.Delivery) bool {
 	fmt.Printf("processing message: %s", string(d.Body))
 
 	// find if event is start or stop
-	m := make(map[string]interface{})
-	if err := json.Unmarshal(d.Body, &m); err != nil {
+	event, err := getMessage(d)
+	if err != nil {
 		log.Fatalln(err)
 		return false
+	}
+
+	// If its not a stream event ignore it and carry on
+	if event == nil {
+		return true
 	}
 
 	// find chromecast to send to - might have to turn into a channel
@@ -67,4 +76,22 @@ func processMessages(d amqp.Delivery) bool {
 	// send to correct chromecast streamer method
 
 	return true
+}
+
+func getMessage(d amqp.Delivery) (models.StreamEvent, error) {
+	if d.Type == streamToChromecast {
+		event := new(models.StreamToChromecastEvent)
+		if err := json.Unmarshal(d.Body, event); err != nil {
+			return nil, err
+		}
+		return event, nil
+	} else if d.Type == stopChromecast {
+		event := new(models.StopPlayingStreamEvent)
+		if err := json.Unmarshal(d.Body, event); err != nil {
+			return nil, err
+		}
+		return event, nil
+	}
+
+	return nil, nil
 }

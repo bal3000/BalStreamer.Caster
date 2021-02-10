@@ -4,8 +4,6 @@
     <list default="true" id="0f36d756-68ec-4d29-a5ff-5693d6611269" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/server.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/server.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/infrastructure/rabbitmq.go" beforeDir="false" afterPath="$PROJECT_DIR$/infrastructure/rabbitmq.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/events.go" beforeDir="false" afterPath="$PROJECT_DIR$/models/events.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,12 +36,14 @@
   </component>
   <component name="PropertiesComponent">
     <property name="DefaultGoTemplateProperty" value="Go File" />
+    <property name="NewWatcherDialog.advanced.open" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="go.import.settings.migrated" value="true" />
     <property name="go.tried.to.enable.integration.vgo.integrator" value="true" />
     <property name="last_opened_file_path" value="$USER_HOME$" />
+    <property name="settings.editor.selected.configurable" value="watcher.settings" />
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TypeScriptGeneratedFilesManager">
@@ -59,12 +59,14 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="First commit - not complete yet" />
     <MESSAGE value="finished chromecast streamer" />
     <MESSAGE value="finished wiring it all up, just rabbit mq left to implement" />
-    <option name="LAST_COMMIT_MESSAGE" value="finished wiring it all up, just rabbit mq left to implement" />
+    <MESSAGE value="custom events for receiving start and stop commands" />
+    <option name="LAST_COMMIT_MESSAGE" value="custom events for receiving start and stop commands" />
   </component>
   <component name="VgoProject">
     <integration-enabled>true</integration-enabled>
