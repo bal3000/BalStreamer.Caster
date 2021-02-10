@@ -2,8 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0f36d756-68ec-4d29-a5ff-5693d6611269" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/config.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/configuration.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/configuration.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/server.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/server.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/events.go" beforeDir="false" afterPath="$PROJECT_DIR$/models/events.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,7 +45,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="go.import.settings.migrated" value="true" />
     <property name="go.tried.to.enable.integration.vgo.integrator" value="true" />
-    <property name="last_opened_file_path" value="$USER_HOME$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../BalStreamer.API" />
     <property name="settings.editor.selected.configurable" value="watcher.settings" />
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -66,7 +69,8 @@
     <MESSAGE value="finished chromecast streamer" />
     <MESSAGE value="finished wiring it all up, just rabbit mq left to implement" />
     <MESSAGE value="custom events for receiving start and stop commands" />
-    <option name="LAST_COMMIT_MESSAGE" value="custom events for receiving start and stop commands" />
+    <MESSAGE value="Logic around intercepting the right events and converting to the correct type" />
+    <option name="LAST_COMMIT_MESSAGE" value="Logic around intercepting the right events and converting to the correct type" />
   </component>
   <component name="VgoProject">
     <integration-enabled>true</integration-enabled>

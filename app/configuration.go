@@ -8,13 +8,10 @@ import (
 
 // Configuration is the model to store the config data
 type Configuration struct {
-	ConnectionString string `json:"connectionString"`
-	RabbitURL        string `json:"rabbitUrl"`
-	ExchangeName     string `json:"exchangeName"`
-	QueueName        string `json:"queueName"`
-	Durable          bool   `json:"durable"`
-	LiveStreamURL    string `json:"liveStreamUrl"`
-	APIKey           string `json:"apiKey"`
+	RabbitURL    string `json:"rabbitUrl"`
+	ExchangeName string `json:"exchangeName"`
+	QueueName    string `json:"queueName"`
+	Durable      bool   `json:"durable"`
 }
 
 // ReadConfig reads the json file and populates the Configuration struct

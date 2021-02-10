@@ -26,7 +26,7 @@ func NewServer(rabbit infrastructure.RabbitMQ, streamer infrastructure.Streamer)
 
 func (s *Server) Run() error {
 	// Start listening for cast events
-	err := s.RabbitMQ.StartConsumer(routingKey, processMessages, 2)
+	err := s.RabbitMQ.StartConsumer(routingKey, s.processMessages, 2)
 	if err != nil {
 		return err
 	}
@@ -56,7 +56,7 @@ func (s *Server) Run() error {
 	return nil
 }
 
-func processMessages(d amqp.Delivery) bool {
+func (s *Server) processMessages(d amqp.Delivery) bool {
 	fmt.Printf("processing message: %s", string(d.Body))
 
 	// find if event is start or stop
@@ -72,8 +72,26 @@ func processMessages(d amqp.Delivery) bool {
 	}
 
 	// find chromecast to send to - might have to turn into a channel
+	selectedCast := event.GetChromecast()
+	renderer := s.ChromecastStreamer.GetChromecast(selectedCast)
+	if renderer == nil {
+		log.Fatalf("Render %s does not exist", selectedCast)
+		return false
+	}
 
 	// send to correct chromecast streamer method
+	switch event.GetType() {
+	case models.PlayStream:
+		if err := s.ChromecastStreamer.StartCasting(event.GetStream(), renderer); err != nil {
+			log.Fatalln(err)
+			return false
+		}
+	case models.StopStream:
+		if err := s.ChromecastStreamer.StopCasting(renderer); err != nil {
+			log.Fatalln(err)
+			return false
+		}
+	}
 
 	return true
 }

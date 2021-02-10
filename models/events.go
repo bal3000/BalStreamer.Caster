@@ -5,6 +5,11 @@ import (
 	"time"
 )
 
+const (
+	PlayStream string = "PlayStreamEvent"
+	StopStream string = "StopStreamEvent"
+)
+
 // ChromecastEventMessage interface for transforming messages
 type ChromecastEventMessage interface {
 	TransformMessage() ([]byte, error)
@@ -30,7 +35,7 @@ type StopPlayingStreamEvent struct {
 }
 
 func (event *StreamToChromecastEvent) GetType() string {
-	return "PlayStreamEvent"
+	return PlayStream
 }
 
 func (event *StreamToChromecastEvent) GetStream() string {
@@ -42,7 +47,7 @@ func (event *StreamToChromecastEvent) GetChromecast() string {
 }
 
 func (event *StopPlayingStreamEvent) GetType() string {
-	return "StopStreamEvent"
+	return StopStream
 }
 
 func (event *StopPlayingStreamEvent) GetStream() string {
