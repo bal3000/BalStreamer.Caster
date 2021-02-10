@@ -2,11 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0f36d756-68ec-4d29-a5ff-5693d6611269" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/config.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/configuration.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/configuration.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/server.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/server.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/events.go" beforeDir="false" afterPath="$PROJECT_DIR$/models/events.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/configuration.go" beforeDir="false" afterPath="$PROJECT_DIR$/infrastructure/configuration.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/infrastructure/rabbitmq.go" beforeDir="false" afterPath="$PROJECT_DIR$/infrastructure/rabbitmq.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,6 +46,27 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../BalStreamer.API" />
     <property name="settings.editor.selected.configurable" value="watcher.settings" />
   </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Go\Workspace\src\github.com\bal3000\BalStreamer.Caster\infrastructure" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="go build main.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+      <module name="BalStreamer.Caster" />
+      <working_directory value="$PROJECT_DIR$" />
+      <kind value="FILE" />
+      <filePath value="$PROJECT_DIR$/main.go" />
+      <package value="github.com/bal3000/BalStreamer.Caster" />
+      <directory value="$PROJECT_DIR$" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Go Build.go build main.go" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
@@ -70,7 +89,8 @@
     <MESSAGE value="finished wiring it all up, just rabbit mq left to implement" />
     <MESSAGE value="custom events for receiving start and stop commands" />
     <MESSAGE value="Logic around intercepting the right events and converting to the correct type" />
-    <option name="LAST_COMMIT_MESSAGE" value="Logic around intercepting the right events and converting to the correct type" />
+    <MESSAGE value="Finished setting up the streamer" />
+    <option name="LAST_COMMIT_MESSAGE" value="Finished setting up the streamer" />
   </component>
   <component name="VgoProject">
     <integration-enabled>true</integration-enabled>

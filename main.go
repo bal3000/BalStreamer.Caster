@@ -7,10 +7,10 @@ import (
 	"os"
 )
 
-var config app.Configuration
+var config infrastructure.Configuration
 
 func init() {
-	config = app.ReadConfig()
+	config = infrastructure.ReadConfig()
 }
 
 func main() {

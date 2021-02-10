@@ -2,7 +2,6 @@ package infrastructure
 
 import (
 	"fmt"
-	"github.com/bal3000/BalStreamer.Caster/app"
 	"github.com/bal3000/BalStreamer.Caster/models"
 	"log"
 
@@ -18,7 +17,7 @@ type RabbitMQ interface {
 
 // RabbitMQConnection - settings to create a connection
 type rabbitMQConnection struct {
-	configuration *app.Configuration
+	configuration *Configuration
 	channel       *amqp.Channel
 }
 
@@ -32,7 +31,7 @@ func (err rabbitError) Error() string {
 }
 
 // NewRabbitMQConnection creates a new rabbit mq connection
-func NewRabbitMQConnection(config *app.Configuration) (RabbitMQ, error) {
+func NewRabbitMQConnection(config *Configuration) (RabbitMQ, error) {
 	conn, err := amqp.Dial(config.RabbitURL)
 	if err != nil {
 		return nil, err
