@@ -31,26 +31,28 @@ func (s *Server) Run() error {
 		return err
 	}
 
+	// Send events out once one is found or removed
+	itemAdded := func(name string) error {
+		message := &models.ChromecastFoundEvent{Chromecast: name}
+		log.Printf("Sending found chromecast message, %v, to routing key: %s", message, routingKey)
+		if err := s.RabbitMQ.SendMessage(routingKey, message); err != nil {
+			return err
+		}
+		return nil
+	}
+
+	itemRemoved := func(name string) error {
+		message := &models.ChromecastLostEvent{Chromecast: name}
+		log.Printf("Sending lost chromecast message, %v, to routing key: %s", message, routingKey)
+		if err := s.RabbitMQ.SendMessage(routingKey, message); err != nil {
+			return err
+		}
+		return nil
+	}
+
 	// Find chromecasts
-	itemAdded := make(chan string)
-	itemRemoved := make(chan string)
 	if err := s.ChromecastStreamer.DiscoverChromecasts(itemAdded, itemRemoved); err != nil {
 		return err
-	}
-
-	// Send events out once one is found or removed
-	for item := range itemAdded {
-		message := &models.ChromecastFoundEvent{Chromecast: item}
-		if err := s.RabbitMQ.SendMessage(routingKey, message); err != nil {
-			return err
-		}
-	}
-
-	for item := range itemRemoved {
-		message := &models.ChromecastLostEvent{Chromecast: item}
-		if err := s.RabbitMQ.SendMessage(routingKey, message); err != nil {
-			return err
-		}
 	}
 
 	return nil

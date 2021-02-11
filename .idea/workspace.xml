@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0f36d756-68ec-4d29-a5ff-5693d6611269" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/app/configuration.go" beforeDir="false" afterPath="$PROJECT_DIR$/infrastructure/configuration.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/infrastructure/rabbitmq.go" beforeDir="false" afterPath="$PROJECT_DIR$/infrastructure/rabbitmq.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/server.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/server.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/infrastructure/chromecast-streamer.go" beforeDir="false" afterPath="$PROJECT_DIR$/infrastructure/chromecast-streamer.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,7 +43,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="go.import.settings.migrated" value="true" />
     <property name="go.tried.to.enable.integration.vgo.integrator" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../BalStreamer.API" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="watcher.settings" />
   </component>
   <component name="RecentsManager">
@@ -90,7 +90,8 @@
     <MESSAGE value="custom events for receiving start and stop commands" />
     <MESSAGE value="Logic around intercepting the right events and converting to the correct type" />
     <MESSAGE value="Finished setting up the streamer" />
-    <option name="LAST_COMMIT_MESSAGE" value="Finished setting up the streamer" />
+    <MESSAGE value="moved config to infra" />
+    <option name="LAST_COMMIT_MESSAGE" value="moved config to infra" />
   </component>
   <component name="VgoProject">
     <integration-enabled>true</integration-enabled>

@@ -3,12 +3,13 @@ package infrastructure
 import (
 	"errors"
 	vlc "github.com/adrg/libvlc-go/v3"
+	"log"
 )
 
 const microdns = "microdns_renderer"
 
 type Streamer interface {
-	DiscoverChromecasts(itemAdded chan string, itemDeleted chan string) error
+	DiscoverChromecasts(itemAdded func(name string) error, itemDeleted func(name string) error) error
 	GetChromecast(key string) *vlc.Renderer
 	StartCasting(url string, rendererItem *vlc.Renderer) error
 	StopCasting(rendererItem *vlc.Renderer) error
@@ -65,14 +66,16 @@ func getDiscoverer() (*vlc.RendererDiscoverer, error) {
 }
 
 // DiscoverChromecasts notifies when chromecasts are found or lost on my network
-func (s *chromecastStreamer) DiscoverChromecasts(itemAdded chan string, itemDeleted chan string) error {
+func (s *chromecastStreamer) DiscoverChromecasts(
+	itemAdded func(name string) error,
+	itemDeleted func(name string) error) error {
 	// Start renderer discovery.
 	stop := make(chan error)
 
 	callback := func(event vlc.Event, r *vlc.Renderer) {
 		// NOTE: the discovery service cannot be stopped or released from
 		// the callback function. Doing so will result in undefined behavior.
-
+		log.Printf("Found event: %v", event)
 		switch event {
 		case vlc.RendererDiscovererItemAdded:
 			// New renderer (`r`) found.
@@ -85,8 +88,11 @@ func (s *chromecastStreamer) DiscoverChromecasts(itemAdded chan string, itemDele
 				if err != nil {
 					stop <- err
 				}
+				log.Printf("Found Chromecast: %s", name)
 				s.chromecasts[name] = *r
-				itemAdded <- name
+				if err = itemAdded(name); err != nil {
+					stop <- err
+				}
 			}
 		case vlc.RendererDiscovererItemDeleted:
 			// The renderer (`r`) is no longer available.
@@ -100,7 +106,9 @@ func (s *chromecastStreamer) DiscoverChromecasts(itemAdded chan string, itemDele
 					stop <- err
 				}
 				delete(s.chromecasts, name)
-				itemDeleted <- name
+				if err = itemDeleted(name); err != nil {
+					stop <- err
+				}
 			}
 		}
 	}
