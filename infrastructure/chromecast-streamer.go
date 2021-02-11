@@ -164,6 +164,7 @@ func (s *chromecastStreamer) StopCasting(rendererItem *vlc.Renderer) error {
 		if err != nil {
 			return err
 		}
+		defer s.player.Release()
 	}
 	return nil
 }

@@ -3,8 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="0f36d756-68ec-4d29-a5ff-5693d6611269" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/server.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/server.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/infrastructure/chromecast-streamer.go" beforeDir="false" afterPath="$PROJECT_DIR$/infrastructure/chromecast-streamer.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/infrastructure/rabbitmq.go" beforeDir="false" afterPath="$PROJECT_DIR$/infrastructure/rabbitmq.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -91,7 +91,8 @@
     <MESSAGE value="Logic around intercepting the right events and converting to the correct type" />
     <MESSAGE value="Finished setting up the streamer" />
     <MESSAGE value="moved config to infra" />
-    <option name="LAST_COMMIT_MESSAGE" value="moved config to infra" />
+    <MESSAGE value="Changed from channels to callbacks as like an idiot I forgot channels would require go routines to be effective" />
+    <option name="LAST_COMMIT_MESSAGE" value="Changed from channels to callbacks as like an idiot I forgot channels would require go routines to be effective" />
   </component>
   <component name="VgoProject">
     <integration-enabled>true</integration-enabled>

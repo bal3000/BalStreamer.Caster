@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/bal3000/BalStreamer.Caster/models"
 	"log"
+	"reflect"
 
 	"github.com/streadway/amqp"
 )
@@ -65,6 +66,7 @@ func (mq *rabbitMQConnection) SendMessage(routingKey string, message models.Chro
 		false,                         // mandatory
 		false,                         // immediate
 		amqp.Publishing{
+			Type:         getType(message),
 			ContentType:  "application/json",
 			Body:         []byte(b),
 			DeliveryMode: amqp.Persistent,
@@ -129,6 +131,14 @@ func (mq *rabbitMQConnection) StartConsumer(routingKey string, handler func(d am
 	}
 
 	return nil
+}
+
+func getType(myvar interface{}) string {
+	if t := reflect.TypeOf(myvar); t.Kind() == reflect.Ptr {
+		return t.Elem().Name()
+	} else {
+		return t.Name()
+	}
 }
 
 func returnErr(err error, msg string) error {
